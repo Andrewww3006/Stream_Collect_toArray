@@ -36,6 +36,16 @@ public class Main {
         String[] stringArray;
         stringArray = stringCollection.stream().distinct().map(String::toUpperCase).toArray(String[]::new);
         System.out.println(Arrays.asList(stringArray));
+
+        String testString = stringCollection.stream().collect(Collectors.joining(":", "<b>", "</b>"));
+        System.out.println(testString);
+        Map<String, String> testMap = stringCollection.stream().distinct().collect(Collectors.toMap(s->s.substring(0,1),s->s.substring(1,2)));
+        System.out.println(testMap);
+        Map<String, List<String>> testMap2 = stringCollection.stream().collect(Collectors.groupingBy((s->s.substring(0,1))));
+        System.out.println(testMap2);
+
+        Map<String, String> testMap3 = stringCollection.stream().collect(Collectors.groupingBy(s->s.substring(0,1),Collectors.mapping(p->p.substring(1,2),Collectors.joining(":"))));
+        System.out.println(testMap3);
     }
 
 }
